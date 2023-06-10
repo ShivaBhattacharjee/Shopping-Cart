@@ -1,4 +1,4 @@
-let deliveryAddressCount = 3; // Initial value for the counter
+let deliveryAddressCount = 3; 
 
 function addDeliveryAddress() {
   const pickupAddresses = document.querySelectorAll('.pickup-address');
@@ -7,15 +7,14 @@ function addDeliveryAddress() {
   const newPickupAddress = document.createElement('div');
   newPickupAddress.className = 'pickup-address';
 
-  // Add barnadcircle element
+
   const barnadCircle = document.createElement('div');
   barnadCircle.className = 'barnadcircle';
 
-  // Check if there is a previous delivery address to connect the line
   const previousBarnadCircle = lastPickupAddress.querySelector('.barnadcircle');
   previousBarnadCircle.classList.add('connected');
 
-  // Update the span value with the incremented count
+
   barnadCircle.innerHTML = `
     <h1>To &nbsp;&nbsp;&nbsp;&nbsp;</h1>
     <div class="circle">
@@ -26,11 +25,11 @@ function addDeliveryAddress() {
 
   newPickupAddress.appendChild(barnadCircle);
 
-  // Clone the pickup card
+
   const pickupCardClone = lastPickupAddress.querySelector('.pickup-card').cloneNode(true);
   const pickupCardCircle = pickupCardClone.querySelector('.circle');
 
-  // Update the span value in the cloned pickup card
+
   pickupCardCircle.innerHTML = `
     <span>${deliveryAddressCount}</span>
   `;
@@ -40,7 +39,7 @@ function addDeliveryAddress() {
   const addButton = document.querySelector('.deliver-add');
   addButton.parentNode.insertBefore(newPickupAddress, addButton);
 
-  deliveryAddressCount++; // Increment the counter
+  deliveryAddressCount++; 
 }
 
 
