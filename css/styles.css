@@ -148,7 +148,9 @@ body {
     padding: 20px;
     flex-direction: column;
 }
-
+.pickup-card .circle{
+    display: none;
+}
 .pickup-card input {
     padding: 16px;
     border-radius: 8px;
@@ -409,19 +411,66 @@ body {
     margin-top: 40px;
     position: fixed;
     bottom: 0%;
-    left: 10%;
+    left: 15%;
+    border-start-start-radius: 8px;
+    border-start-end-radius: 8px;
 }
+.barnadcircle{
+    position: absolute;
+    left: calc(16vw - 0px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.barnadcircle h1{
+    font-size: 20px;
+}
+.circle{
+    border: 1px solid #0048ff;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.circle .line{
+    background: #0048ff;
+    width: 1.3px;
+    height: 390px;
+    position: absolute;
+    top: calc(5.7vh - 10px);
+}
+.barnadcircle.connected .circle .line {
+    display: block;
+  }
+
+  
+  
 /* media queries here */
 
 @media(max-width:1400px) {
+    .barnadcircle{
+        display: none;
+    }
     .container {
         max-width: 80%;
     }
     .pricing{
         width: 30%;
     }
+    .pickup-card .circle{
+        display: flex;
+    }
 }
 
+@media(max-width:900px){
+    .deliver-add {
+        width: 30%;
+    }
+}
 @media(max-width:820px) {
     .container {
         max-width: 100%;
@@ -538,5 +587,13 @@ body {
     .pricing{
         width: 40%;
         left: 2%;
+    }
+}
+@media(max-width:320px){
+    .order-card{
+        font-size: 10px;
+    }
+    .pricing{
+        width: 60%;
     }
 }
