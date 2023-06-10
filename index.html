@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Shpping Checkout</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- order section -->
+
+        <div class="heading">
+            <h1>Order</h1>
+        </div>
+        <div class="order-card">
+            <div class="order-options">
+                <img src="./assets/clock.svg" alt="">
+                <h3>Deliver Now</h3>
+                <p>We will assign the nearest courier to pick-up and deliver as soon as possible.</p>
+                <span>from ₹ 45</span>
+            </div>
+            <div class="order-options">
+                <img src="./assets/calender.svg" alt="">
+                <h3>Schedule</h3>
+                <p>We will arrive at each address at specified times.</p>
+                <span>from ₹ 45</span>
+            </div>
+        </div>
+
+        <!-- weight section -->
+        <div class="weight">
+            <div class="weight-heading">
+                <h2>Weight</h1>
+            </div>
+            <div class="weight-buttons">
+                <button>Up to 1 kg</button>
+                <button>Up to 5 kg</button>
+                <button>Up to 10 kg</button>
+                <button>Up to 15 kg</button>
+                <button>Up to 20 kg</button>
+            </div>
+        </div>
+
+        <!-- pickup address section -->
+
+        <div class="pickup-address">
+            <div class="locationtoandfrom">
+            </div>
+            <div class="pickup-card">
+                <label for="text">Pick Up Address</label>
+                <input type="text" placeholder="Street name & Locality Name">
+                <label for="number">10-digit mobile</label>
+                <div class="flex-pickup">
+                    <input type="number" autocomplete="off" placeholder="хххххххххх" type="tel">
+                </div>
+                <textarea name="" class="address-field"
+                    placeholder="flat number , floor , building , name , street , name , landmarks, dimensions, package, fragile, contact , name , etc"></textarea>
+
+                <div class="flex-pickup">
+                    <input type="text" class="contact-person" placeholder="contact person">
+                    <input type="text" class="order-number" placeholder="Your order number" />
+                </div>
+            </div>
+        </div>
+
+        <div class="pickup-address">
+            <div class="pickup-card">
+                <label for="text">Delivery Address</label>
+                <input type="text" placeholder="Street name & Locality Name">
+                <label for="number">10-digit mobile</label>
+                <div class="flex-pickup">
+                    <input data-testid="unique-order-form__point-phone-0" class="Input_Field_FGKNl" autocomplete="off"
+                        placeholder="хххххххххх" type="tel" value="__ ________">
+                </div>
+                <textarea name="" class="address-field"
+                    placeholder="flat number , floor , building , name , street , name , landmarks, dimensions, package, fragile, contact , name , etc"></textarea>
+                <div class="flex-pickup">
+                    <input type="text" class="contact-person" placeholder="contact person">
+                    <input type="text" class="order-number" placeholder="Your order number" />
+                </div>
+            </div>
+        </div>
+        <button class="deliver-add" onclick="addDeliveryAddress()"><span>+</span> Add Delivery Address</button>
+
+        <div class="checkbox-secure">
+            <input type="checkbox" name="" id="">
+            <span>Optmise Route</span>
+        </div>
+
+        <!-- what are you sending -->
+
+        <div class="parcel-type-card">
+            <input type="text" placeholder="What are you sending? (Note: We deliver cakes upto 1kg only)">
+            <div class="parcelypes">
+                <ul>
+                    <li>Document</li>
+                    <li>Food</li>
+                    <li>Cloth</li>
+                    <li>Flowers</li>
+                    <li>Cake</li>
+                    <li>Parcel</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- secure parcel card -->
+        <div class="secure-parcel-card">
+            <h1>Secure your parcel</h1>
+            <div class="secure-flex">
+                <input type="text" placeholder="Parcel value">
+                <span>₹ 0 : Additional charges for securing parcel</span>
+            </div>
+            <p>Secure your important or fragile packages to retrieve the value in case of loss or damage done during
+                delivery. We charge a fee of 0.85%+GST of the value you declare above (added to the delivery cost) for
+                this. Valid upto
+                <span>₹ 50000.</span>
+            </p>
+        </div>
+        <div class="checkbox-secure">
+            <input type="checkbox" name="" id="">
+            <span>Prefer Courier with Delivery Bag</span>
+        </div>
+
+
+        <!-- payment type -->
+        <div class="payment-cards">
+            <h1>Payment type</h1>
+            <div class="payment-option">
+                <div class="balance">
+                    <img src="./assets/payment.svg" alt=""> From the Balance
+                    <br class="opacity-low">₹ 0
+                </div>
+
+                <div class="balance">
+                    <img src="./assets/card.svg" alt=""> Online Payment
+                    <br>Orders using this option cannot be edited
+                </div>
+            </div>
+            <div class="coupon">
+                <input type="text" placeholder="Apply Coupon code"><button>Apply</button>
+                <!-- <span>I have a coupon</span> -->
+            </div>
+        </div>
+
+        <!-- total cart -->
+
+        <div class="total-card-section">
+            <div class="total-price">
+                <h1>Total : from ₹ 45</h1>
+            </div>
+            <div class="other-btns">
+                <button>Submit Order</button>
+                <img src="./assets/save.svg" alt="">
+            </div>
+            <div class="termshere">
+                <span>By Clicking 'Submit order' you are forwarding your request to couriers and agree to Our Terms and
+                    Conditions along with the clauses of the agreements</p>
+                    <p>SMS notifications can be set after sending an order</p>
+                    <p>To order a delivery boy just follow these simple steps:</p>
+                    <ul>
+                        <li>Provide us with necessary details: addresses, phone numbers at each address, desired time of
+                            delivery, weight of the delivery</li>
+                        <li>If you like our quote, then click 'Submit order' button</li>
+
+                        <li>Receive a call from the delivery boy assigned for your order. Negotiate, at which point he
+                            will be paid. Give him more details about your parcel and desired process.</li>
+
+                        <li>Send us a message or call our Operator in case of any doubt. You will get the Operator's
+                            number by clicking 'Order' button, save it with your order's number</li>
+                    </ul>
+
+            </div>
+        </div>
+    </div>
+    <script src="./javascipt/index.js">
+    </script>
+</body>
+
+</html>
