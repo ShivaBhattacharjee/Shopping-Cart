@@ -12,17 +12,17 @@ function addDeliveryAddress() {
   addButton.parentNode.insertBefore(newPickupAddress, addButton);
 }
 
-// Get all the order options
+
 const orderOptions = document.querySelectorAll('.order-options');
 
-// Add click event listener to each order option
+
 orderOptions.forEach(option => {
   option.addEventListener('click', function() {
-    // Remove active class from all order options
+
     orderOptions.forEach(option => {
       option.classList.remove('active');
     });
-    // Add active class to the clicked order option
+
     this.classList.add('active');
   });
 });
@@ -33,11 +33,11 @@ updateTotalPrice();
 const weightButtons = document.querySelectorAll('.weight-buttons button');
 weightButtons.forEach(button => {
   button.addEventListener('click', function() {
-    // Remove active class from all weight buttons
+  
     weightButtons.forEach(btn => {
       btn.classList.remove('active');
     });
-    // Add active class to the clicked weight button
+    
     this.classList.add('active');
 
     selectedWeight = parseInt(this.getAttribute('data-weight'));
@@ -59,3 +59,16 @@ defaultWeightButton.classList.add('active');
 
 const defaultOrderOption = document.querySelector('.order-options');
 defaultOrderOption.classList.add('active');
+const paymentOptions = document.querySelectorAll('.balance');
+
+
+paymentOptions.forEach(option => {
+  option.addEventListener('click', function() {
+  
+    paymentOptions.forEach(option => {
+      option.classList.remove('active');
+    });
+
+    this.classList.add('active');
+  });
+});

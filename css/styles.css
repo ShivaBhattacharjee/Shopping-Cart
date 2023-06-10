@@ -312,7 +312,9 @@ body {
     border-radius: 8px;
     cursor: pointer;
 }
-
+.balance.active{
+    border: 1px solid #0048ff;
+}
 .payment-cards h1 {
     font-size: 20px;
 }
