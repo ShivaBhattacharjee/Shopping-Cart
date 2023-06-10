@@ -21,7 +21,7 @@
             <h1>Order</h1>
         </div>
         <div class="order-card">
-            <div class="order-options">
+            <div class="order-options active">
                 <img src="./assets/clock.svg" alt="">
                 <h3>Deliver Now</h3>
                 <p>We will assign the nearest courier to pick-up and deliver as soon as possible.</p>
@@ -41,7 +41,7 @@
                 <h2>Weight</h1>
             </div>
             <div class="weight-buttons">
-                <button data-weight="1">Up to 1 kg</button>
+                <button data-weight="1" class="active">Up to 1 kg</button>
                 <button data-weight="5">Up to 5 kg</button>
                 <button data-weight="10">Up to 10 kg</button>
                 <button data-weight="15">Up to 15 kg</button>
@@ -178,6 +178,9 @@
                     </ul>
 
             </div>
+        </div>
+        <div class="pricing">
+            Total: ₹ <span id="total-price"></span>
         </div>
     </div>
     <script src="./javascipt/index.js">
