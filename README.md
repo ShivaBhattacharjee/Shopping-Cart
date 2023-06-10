@@ -6,13 +6,11 @@ A Parcel delivering service checkout page ui design
 
 ### Installation
 ```sh
-  git clone https://github.com/ShivaBhattacharjee/AnimeTrix.git
+  git clone https://github.com/ShivaBhattacharjee/Shopping-Cart
   
-  cd AnimeTrix
+  cd Shopping-card
   
-  npm install
-  
-  npm start //server will run at localhost:3000
+  start index.html
 ```
 
 
