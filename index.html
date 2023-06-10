@@ -41,11 +41,11 @@
                 <h2>Weight</h1>
             </div>
             <div class="weight-buttons">
-                <button>Up to 1 kg</button>
-                <button>Up to 5 kg</button>
-                <button>Up to 10 kg</button>
-                <button>Up to 15 kg</button>
-                <button>Up to 20 kg</button>
+                <button data-weight="1">Up to 1 kg</button>
+                <button data-weight="5">Up to 5 kg</button>
+                <button data-weight="10">Up to 10 kg</button>
+                <button data-weight="15">Up to 15 kg</button>
+                <button data-weight="20">Up to 20 kg</button>
             </div>
         </div>
 
@@ -154,7 +154,7 @@
 
         <div class="total-card-section">
             <div class="total-price">
-                <h1>Total : from ₹ 45</h1>
+                <h1>Total: from ₹ <span id="total-price"></span></h1>
             </div>
             <div class="other-btns">
                 <button>Submit Order</button>
