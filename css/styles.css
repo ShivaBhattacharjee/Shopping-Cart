@@ -478,6 +478,18 @@ body {
  .total-price:hover .faqandtootip{
     opacity: 1;
   }
+  .parcel-schedule{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .parcel-schedule select{
+    height: 50px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #005b00 ;
+    outline: none;
+  }
 /* media queries here */
 
 @media(max-width:1400px) {

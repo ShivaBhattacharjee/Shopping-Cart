@@ -185,3 +185,60 @@ function calculateDistance() {
 
 // Call updateTotalPrice to initialize the total price display
 updateTotalPrice();
+
+
+// Get the current local date
+const currentDate = new Date().toLocaleDateString('en-CA');
+
+// Set the min attribute of the depart date input field to the current local date
+document.getElementById("depart-date-input").min = currentDate;
+
+// Set the min attribute of the arrive date input field to the current local date
+document.getElementById("arrive-date-input").min = currentDate;
+
+// Function to enable/disable schedule options based on the selected date and time
+function updateScheduleOptions() {
+  const currentDate = new Date().toLocaleDateString('en-CA');
+  const selectedDate = document.getElementById("arrive-date-input").value;
+  const selectedSchedule = document.getElementById("schedule").value;
+  const currentTime = new Date().getHours();
+  const scheduleOptions = document.querySelectorAll("#schedule option");
+
+  // Enable/disable options based on the selected date and time
+  if (selectedDate === currentDate) {
+    if (currentTime < 6 || (currentTime >= 12 && currentTime < 18)) {
+      // Disable "6am to 12pm" and "12pm to 6pm" options
+      scheduleOptions[1].disabled = true;
+      scheduleOptions[2].disabled = true;
+      scheduleOptions[3].disabled = true;
+      // Select the default option
+      scheduleOptions[0].selected = true;
+    } else if (currentTime >= 6 && currentTime < 12) {
+      // Disable "12pm to 6pm" option
+      scheduleOptions[3].disabled = true;
+    } else if (currentTime >= 18 || currentTime < 6) {
+      // Disable "6am to 12pm" option
+      scheduleOptions[1].disabled = true;
+    }
+  } else {
+    // Enable all options for future dates
+    scheduleOptions.forEach(option => {
+      option.disabled = false;
+    });
+  }
+
+  // Show/hide the "Change date" option
+  const changeDateOption = document.querySelector("#schedule option[value='change-date-option']");
+  if (selectedDate === currentDate) {
+    changeDateOption.disabled = false;
+  } else {
+    changeDateOption.disabled = true;
+  }
+}
+
+// Attach event listeners to the date input fields
+document.getElementById("arrive-date-input").addEventListener("change", updateScheduleOptions);
+document.getElementById("depart-date-input").addEventListener("change", updateScheduleOptions);
+
+// Initial update of schedule options based on the current date and time
+updateScheduleOptions();
