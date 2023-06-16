@@ -2,7 +2,7 @@
 
 
 
-A Parcel delivering service checkout page ui design 
+A Parcel delivering service checkout page 
 
 ### Installation
 ```sh
