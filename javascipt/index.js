@@ -37,7 +37,9 @@
 
 //   deliveryAddressCount++;
 // }
-let distance ;
+
+
+let distance;
 const orderOptions = document.querySelectorAll('.order-options');
 orderOptions.forEach(option => {
   option.addEventListener('click', function () {
@@ -48,8 +50,54 @@ orderOptions.forEach(option => {
   });
 });
 
-let selectedWeight = 5;
-updateTotalPrice();
+let selectedWeight = 1;
+
+// Update defaultWeightButton selection
+const defaultWeightButton = document.querySelector('.weight-buttons button[data-weight="1"]');
+defaultWeightButton.classList.add('active');
+defaultWeightButton.click();
+
+let previousDistance;
+let previousWeight = 1;
+
+function updateTotalPrice(distance) {
+  let totalPrice = 45;
+
+  if (distance && selectedWeight <= 30) {
+    totalPrice = distance * 12;
+    const gst = totalPrice * 0.18;
+    totalPrice += gst;
+  } else if (selectedWeight > 30) {
+    if (distance && selectedWeight) {
+      totalPrice = distance * 12 + 50;
+      const gst = totalPrice * 0.18;
+      totalPrice += gst;
+    } else {
+      totalPrice = 95;
+    }
+  }
+
+  // If distance is not available, use the previous distance value
+  if (!distance && previousDistance) {
+    totalPrice = previousDistance * 12;
+
+    if (previousWeight <= 30) {
+      const gst = totalPrice * 0.18;
+      totalPrice += gst;
+    } else {
+      totalPrice += 50;
+      const gst = totalPrice * 0.18;
+      totalPrice += gst;
+    }
+  }
+
+  document.querySelector('.total-price h1').textContent = `Total: from ₹ ${totalPrice}`;
+  document.getElementById('total-price').textContent = totalPrice;
+
+  // Store the current distance and weight for future reference
+  previousDistance = distance;
+  previousWeight = selectedWeight;
+}
 
 const weightButtons = document.querySelectorAll('.weight-buttons button');
 weightButtons.forEach(button => {
@@ -58,32 +106,15 @@ weightButtons.forEach(button => {
       btn.classList.remove('active');
     });
     this.classList.add('active');
-    selectedWeight = parseInt(this.getAttribute('data-weight'));
+    const weight = parseInt(this.getAttribute('data-weight'));
+    if (weight > 30) {
+      selectedWeight = weight;
+    } else {
+      selectedWeight = 1;
+    }
     updateTotalPrice();
   });
 });
-
-// Update defaultWeightButton selection
-const defaultWeightButton = document.querySelector('.weight-buttons button[data-weight="1"]');
-defaultWeightButton.classList.add('active');
-defaultWeightButton.click();
-
-function updateTotalPrice() {
-  let totalPrice = 45;
-  if(selectedWeight<=30){
-    totalPrice = totalPrice  ;
-  }
-  else if (selectedWeight > 30) {
-      totalPrice = totalPrice + 50
-  }
-  document.querySelector('.total-price h1').textContent = `Total: from ₹ ${totalPrice}`;
-  document.getElementById('total-price').textContent = totalPrice;
-
-  if (selectedWeight === 1) {
-    document.querySelector('.total-price h1').textContent = `Total: from ₹ ${totalPrice}`;
-    document.getElementById('total-price').textContent = totalPrice;
-  }
-}
 
 const defaultOrderOption = document.querySelector('.order-options');
 defaultOrderOption.classList.add('active');
@@ -108,34 +139,34 @@ const deliveryAddressInput = document.getElementById('delivery-address-input');
 const pickupAutocomplete = new google.maps.places.Autocomplete(pickupAddressInput);
 const deliveryAutocomplete = new google.maps.places.Autocomplete(deliveryAddressInput);
 
-
 const directionsService = new google.maps.DirectionsService();
-
 
 pickupAddressInput.addEventListener('change', calculateDistance);
 deliveryAddressInput.addEventListener('change', calculateDistance);
-
 
 function calculateDistance() {
   const pickupAddress = pickupAddressInput.value;
   const deliveryAddress = deliveryAddressInput.value;
 
-
   if (pickupAddress && deliveryAddress) {
     const request = {
       origin: pickupAddress,
       destination: deliveryAddress,
-      travelMode: google.maps.TravelMode.DRIVING // change travel mode based on pref its hardcoded right now tho as i am too lazy
+      travelMode: google.maps.TravelMode.DRIVING
     };
 
-    // some functions you probably know read docs if you dont understand anything 
-    directionsService.route(request, function(response, status) {
+    directionsService.route(request, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
-        distance = response.routes[0].legs[0].distance.text;
-        console.log('Distance between pickup and delivery: ' + distance);
+        distance = response.routes[0].legs[0].distance.text; // e.g., "10 km"
+        const numericDistance = parseInt(distance.split(' ')[0]); // Extract the numerical value and convert to integer
+        updateTotalPrice(numericDistance); // Pass the numeric distance to updateTotalPrice
+        console.log('Distance between pickup and delivery: ' + numericDistance);
       } else {
         console.log('Error calculating distance:', status);
       }
     });
   }
 }
+
+// Call updateTotalPrice to initialize the total price display
+updateTotalPrice();
