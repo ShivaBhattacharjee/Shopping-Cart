@@ -101,62 +101,38 @@ paymentOptions.forEach(option => {
 const pickupAddressInput = document.getElementById('pickup-address-input');
 const deliveryAddressInput = document.getElementById('delivery-address-input');
 
-// Create instances of the Google Places Autocomplete widget
+// google autocomplete widget 
 const pickupAutocomplete = new google.maps.places.Autocomplete(pickupAddressInput);
 const deliveryAutocomplete = new google.maps.places.Autocomplete(deliveryAddressInput);
 
-// Initialize variables to store the place objects
-let pickupPlace = null;
-let deliveryPlace = null;
 
-// Add event listeners to the input fields
-pickupAddressInput.addEventListener('change', handleAddressChange);
-deliveryAddressInput.addEventListener('change', handleAddressChange);
+const directionsService = new google.maps.DirectionsService();
 
-function handleAddressChange() {
-  // Get the place object for the pickup address
-  pickupPlace = pickupAutocomplete.getPlace();
 
-  // Get the place object for the delivery address
-  deliveryPlace = deliveryAutocomplete.getPlace();
+pickupAddressInput.addEventListener('change', calculateDistance);
+deliveryAddressInput.addEventListener('change', calculateDistance);
 
-  // Check if both addresses are filled
-  if (pickupPlace && deliveryPlace) {
-    // Calculate the distance between the two addresses
-    const distance = calculateDistance(pickupPlace.geometry.location, deliveryPlace.geometry.location);
-    console.log('Distance (km):', distance);
+
+function calculateDistance() {
+  const pickupAddress = pickupAddressInput.value;
+  const deliveryAddress = deliveryAddressInput.value;
+
+
+  if (pickupAddress && deliveryAddress) {
+    const request = {
+      origin: pickupAddress,
+      destination: deliveryAddress,
+      travelMode: google.maps.TravelMode.DRIVING // change travel mode based on pref its hardcoded right now tho as i am too lazy
+    };
+
+    // some functions you probably know why btw dont call me if you dont understand anything 
+    directionsService.route(request, function(response, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        const distance = response.routes[0].legs[0].distance.text;
+        console.log('Distance between pickup and delivery: ' + distance);
+      } else {
+        console.log('Error calculating distance:', status);
+      }
+    });
   }
 }
-
-function calculateDistance(pickupLocation, deliveryLocation, callback) {
-  // Create a new instance of the Distance Matrix service
-  const distanceService = new google.maps.DistanceMatrixService();
-
-  // Prepare the request for distance calculation
-  const request = {
-    origins: [pickupLocation],
-    destinations: [deliveryLocation],
-    travelMode: 'DRIVING'
-  };
-
-  // Call the Distance Matrix service
-  distanceService.getDistanceMatrix(request, (response, status) => {
-    if (status === 'OK') {
-      // Get the distance in meters from the response
-      const distanceInMeters = response.rows[0].elements[0].distance.value;
-
-      // Convert the distance to kilometers
-      const distanceInKm = distanceInMeters / 1000;
-
-      // Invoke the callback with the calculated distance
-      callback(distanceInKm);
-    } else {
-      console.log('Distance calculation failed:', status);
-    }
-  });
-}
-
-// Example usage of the calculateDistance function
-calculateDistance(pickupPlace.geometry.location, deliveryPlace.geometry.location, distance => {
-  console.log('Distance (km):', distance);
-});
