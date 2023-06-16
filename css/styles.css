@@ -462,7 +462,7 @@ body {
     cursor: pointer;
   }
   .faqandtootip{
-    background: black;
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     display: flex;
     justify-content: center;
@@ -637,6 +637,16 @@ body {
     .faqandtootip{
         font-size: 15px;
         transform: translate(60%,-70%);
+    }
+    .parcel-schedule{
+        flex-direction: column;
+    }
+    .parcel-schedule select{
+        width: 100%;
+        border-radius: 8px;
+    }
+    .parcel-schedule span{
+        display: none;
     }
 }
 @media(max-width:325px){
