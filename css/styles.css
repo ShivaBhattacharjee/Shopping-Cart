@@ -18,7 +18,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #0048ff;
+    background: #005b00 ;
 }
 
 .container {
@@ -67,7 +67,7 @@ body {
 }
 
 .order-options.active{
-    border: 1px solid #0048ff;
+    border: 2px solid #005b00 ;
 }
 
 .order-card h1 {
@@ -78,7 +78,7 @@ body {
 
 .order-card img {
     width: 25px;
-    fill: #0048ff;
+    fill: #005b00 ;
 }
 
 .order-card p {
@@ -112,7 +112,7 @@ body {
     flex-wrap: wrap;
 }
 .weight-buttons .active{
-    border: 1px solid #0048ff;
+    border: 2px solid #005b00 ;
 }
 
 .weight-buttons button {
@@ -200,7 +200,7 @@ body {
     border-radius: 3px;
     outline: none;
     border: none;
-    background: #0048ff;
+    background: #005b00 ;
     color: #fff;
     display: flex;
     align-items: center;
@@ -239,7 +239,7 @@ body {
     padding-top: 10px;
     display: flex;
     gap: 12px;
-    color: #0048ff;
+    color: #005b00;
     overflow-y: scroll;
 }
 
@@ -315,7 +315,7 @@ body {
     cursor: pointer;
 }
 .balance.active{
-    border: 1px solid #0048ff;
+    border: 1px solid #005b00 ;
 }
 .payment-cards h1 {
     font-size: 20px;
@@ -334,7 +334,7 @@ body {
 }
 
 .coupon {
-    color: #0048ff;
+    color: #005b00 ;
     display: flex;
     gap: 10px;
     margin-top: 1rem;
@@ -351,7 +351,7 @@ body {
     padding: 8px 40px;
     outline: none;
     border: none;
-    background: #0048ff;
+    background: #005b00 ;
     color: #fff;
     border-radius: 8px;
     cursor: pointer;
@@ -376,7 +376,7 @@ body {
     outline: none;
     font-size: 16px;
     border: none;
-    background: #0048ff;
+    background: #005b00 ;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
@@ -403,7 +403,7 @@ body {
 }
 
 .pricing{
-    background: #000;
+    background: rgba(0, 0 , 0, 0.8);
     color: #fff;
     padding: 20px;
     width: 10%;
@@ -426,8 +426,15 @@ body {
 .barnadcircle h1{
     font-size: 20px;
 }
+.lineandcircle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
 .circle{
-    border: 1px solid #0048ff;
+    border: 1px solid #005b00 ;
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -436,12 +443,10 @@ body {
     justify-content: center;
     flex-direction: column;
 }
-.circle .line{
-    background: #0048ff;
+.line{
+    background: #005b00 ;
     width: 1.3px;
     height: 390px;
-    position: absolute;
-    top: calc(5.7vh - 10px);
 }
 .barnadcircle.connected .circle .line {
     display: block;
@@ -577,7 +582,7 @@ body {
         outline: none;
         font-size: 14px;
         border: none;
-        background: #0048ff;
+        background: #005b00 ;
         color: #fff;
         border-radius: 4px;
     }

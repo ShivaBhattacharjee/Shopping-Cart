@@ -1,46 +1,46 @@
 let deliveryAddressCount = 3; 
 
-function addDeliveryAddress() {
-  const pickupAddresses = document.querySelectorAll('.pickup-address');
-  const lastPickupAddress = pickupAddresses[pickupAddresses.length - 1];
+// function addDeliveryAddress() {
+//   const pickupAddresses = document.querySelectorAll('.pickup-address');
+//   const lastPickupAddress = pickupAddresses[pickupAddresses.length - 1];
 
-  const newPickupAddress = document.createElement('div');
-  newPickupAddress.className = 'pickup-address';
-
-
-  const barnadCircle = document.createElement('div');
-  barnadCircle.className = 'barnadcircle';
-
-  const previousBarnadCircle = lastPickupAddress.querySelector('.barnadcircle');
-  previousBarnadCircle.classList.add('connected');
+//   const newPickupAddress = document.createElement('div');
+//   newPickupAddress.className = 'pickup-address';
 
 
-  barnadCircle.innerHTML = `
-    <h1>To &nbsp;&nbsp;&nbsp;&nbsp;</h1>
-    <div class="circle">
-      <span>${deliveryAddressCount}</span>
-      <div class="line"></div>
-    </div>
-  `;
+//   const barnadCircle = document.createElement('div');
+//   barnadCircle.className = 'barnadcircle';
 
-  newPickupAddress.appendChild(barnadCircle);
+//   const previousBarnadCircle = lastPickupAddress.querySelector('.barnadcircle');
+//   previousBarnadCircle.classList.add('connected');
 
 
-  const pickupCardClone = lastPickupAddress.querySelector('.pickup-card').cloneNode(true);
-  const pickupCardCircle = pickupCardClone.querySelector('.circle');
+//   barnadCircle.innerHTML = `
+//     <h1>To &nbsp;&nbsp;&nbsp;&nbsp;</h1>
+//     <div class="circle">
+//       <span>${deliveryAddressCount}</span>
+//       <div class="line"></div>
+//     </div>
+//   `;
+
+//   newPickupAddress.appendChild(barnadCircle);
 
 
-  pickupCardCircle.innerHTML = `
-    <span>${deliveryAddressCount}</span>
-  `;
+//   const pickupCardClone = lastPickupAddress.querySelector('.pickup-card').cloneNode(true);
+//   const pickupCardCircle = pickupCardClone.querySelector('.circle');
 
-  newPickupAddress.appendChild(pickupCardClone);
 
-  const addButton = document.querySelector('.deliver-add');
-  addButton.parentNode.insertBefore(newPickupAddress, addButton);
+//   pickupCardCircle.innerHTML = `
+//     <span>${deliveryAddressCount}</span>
+//   `;
 
-  deliveryAddressCount++; 
-}
+//   newPickupAddress.appendChild(pickupCardClone);
+
+//   const addButton = document.querySelector('.deliver-add');
+//   addButton.parentNode.insertBefore(newPickupAddress, addButton);
+
+//   deliveryAddressCount++; 
+// }
 
 
 
@@ -112,3 +112,16 @@ paymentOptions.forEach(option => {
     this.classList.add('active');
   });
 });
+
+// Get a reference to the input field
+const addressInput = document.getElementById('pickup-address-input');
+
+// Create a new instance of the Google Places Autocomplete widget
+const autocomplete = new google.maps.places.Autocomplete(addressInput);
+
+function initializeAutocomplete() {
+  var input = document.getElementById('delivery-address-input');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+}
+
+google.maps.event.addDomListener(window, 'load', initializeAutocomplete);

@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
-    <title>Shpping Checkout</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeA6oaL7dB_sOMHzTjcnoO5aTiM-WvwJs&libraries=places"></script>
+    <title>Shopping Checkout</title>
 </head>
 
 <body>
@@ -21,12 +22,12 @@
             <h1>Order</h1>
         </div>
         <div class="order-card">
-            <div class="order-options active">
+            <!-- <div class="order-options active">
                 <img src="./assets/clock.svg" alt="">
                 <h3>Deliver Now</h3>
                 <p>We will assign the nearest courier to pick-up and deliver as soon as possible.</p>
                 <span>from ₹ 45</span>
-            </div>
+            </div> -->
             <div class="order-options">
                 <img src="./assets/calender.svg" alt="">
                 <h3>Schedule</h3>
@@ -42,10 +43,11 @@
             </div>
             <div class="weight-buttons">
                 <button data-weight="1" class="active">Up to 1 kg</button>
-                <button data-weight="5">Up to 5 kg</button>
                 <button data-weight="10">Up to 10 kg</button>
-                <button data-weight="15">Up to 15 kg</button>
                 <button data-weight="20">Up to 20 kg</button>
+                <button data-weight="30">Up to 30 kg</button>
+                <button data-weight="40">Up to 40 kg</button>
+                <button data-weight="50">Up to 50 kg</button>
             </div>
         </div>
 
@@ -53,9 +55,11 @@
 
         <div class="pickup-address">
             <div class="barnadcircle">
-                <h1>From</h1>
-                <div class="circle">
-                    <span>1</span>
+                <h3>From</h3>
+                <div class="lineandcircle">
+                    <div class="circle">
+                        <span>1</span>
+                    </div>
                     <div class="line"></div>
                 </div>
             </div>
@@ -66,19 +70,20 @@
                     <span>1</span>
                 </div>
                 <label for="text">Pick Up Address</label>
-                <input type="text" placeholder="Street name & Locality Name">
+                <input type="text" id="pickup-address-input" placeholder="Street name & Locality Name">
                 <label for="number">10-digit mobile</label>
                 <div class="flex-pickup">
-                    <input type="number" autocomplete="off" placeholder="хххххххххх" type="tel">
+                    <input type="tel" autocomplete="off" placeholder="хххххххххх" type="tel">
                 </div>
                 <textarea name="" class="address-field"
-                    placeholder="flat number , floor , building , name , street , name , landmarks, dimensions, package, fragile, contact , name , etc"></textarea>
+                    placeholder="flat number, floor, building, name, street, name, landmarks, dimensions, package, fragile, contact, name, etc"></textarea>
 
                 <div class="flex-pickup">
                     <input type="text" class="contact-person" placeholder="contact person">
                     <input type="text" class="order-number" placeholder="Your order number" />
                 </div>
             </div>
+
         </div>
 
         <div class="pickup-address">
@@ -86,7 +91,6 @@
                 <h1>To &nbsp;&nbsp;&nbsp;&nbsp;</h1>
                 <div class="circle">
                     <span>2</span>
-                    <div class="line"></div>
                 </div>
             </div>
             <div class="pickup-card">
@@ -94,26 +98,27 @@
                     <span>2</span>
                 </div>
                 <label for="text">Delivery Address</label>
-                <input type="text" placeholder="Street name & Locality Name">
+                <input type="text"  id="delivery-address-input"  placeholder="Street name & Locality Name">
                 <label for="number">10-digit mobile</label>
                 <div class="flex-pickup">
-                    <input type="number" autocomplete="off"
-                        placeholder="хххххххххх" type="tel" value="__ ________">
+                    <input type="tel" autocomplete="off" placeholder="хххххххххх" type="tel">
                 </div>
                 <textarea name="" class="address-field"
-                    placeholder="flat number , floor , building , name , street , name , landmarks, dimensions, package, fragile, contact , name , etc"></textarea>
+                    placeholder="flat number, floor, building, name, street, name, landmarks, dimensions, package, fragile, contact, name, etc"></textarea>
+            
                 <div class="flex-pickup">
                     <input type="text" class="contact-person" placeholder="contact person">
                     <input type="text" class="order-number" placeholder="Your order number" />
                 </div>
             </div>
+            
         </div>
-        <button class="deliver-add" onclick="addDeliveryAddress()"><span>+</span> Add Delivery Address</button>
+        <!-- <button class="deliver-add" onclick="addDeliveryAddress()"><span>+</span> Add Delivery Address</button> -->
 
-        <div class="checkbox-secure">
+        <!-- <div class="checkbox-secure">
             <input type="checkbox" name="" id="">
             <span>Optmise Route</span>
-        </div>
+        </div> -->
 
         <!-- what are you sending -->
 
@@ -132,7 +137,7 @@
         </div>
 
         <!-- secure parcel card -->
-        <div class="secure-parcel-card">
+        <!-- <div class="secure-parcel-card">
             <h1>Secure your parcel</h1>
             <div class="secure-flex">
                 <input type="text" placeholder="Parcel value">
@@ -147,7 +152,7 @@
         <div class="checkbox-secure">
             <input type="checkbox" name="" id="">
             <span>Prefer Courier with Delivery Bag</span>
-        </div>
+        </div> -->
 
 
         <!-- payment type -->
