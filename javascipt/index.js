@@ -37,7 +37,7 @@
 
 //   deliveryAddressCount++;
 // }
-
+let distance ;
 const orderOptions = document.querySelectorAll('.order-options');
 orderOptions.forEach(option => {
   option.addEventListener('click', function () {
@@ -70,8 +70,11 @@ defaultWeightButton.click();
 
 function updateTotalPrice() {
   let totalPrice = 45;
-  if (selectedWeight > 1) {
-    totalPrice += (selectedWeight - 1) * 10;
+  if(selectedWeight<=30){
+    totalPrice = totalPrice  ;
+  }
+  else if (selectedWeight > 30) {
+      totalPrice = totalPrice + 50
   }
   document.querySelector('.total-price h1').textContent = `Total: from ₹ ${totalPrice}`;
   document.getElementById('total-price').textContent = totalPrice;
@@ -125,10 +128,10 @@ function calculateDistance() {
       travelMode: google.maps.TravelMode.DRIVING // change travel mode based on pref its hardcoded right now tho as i am too lazy
     };
 
-    // some functions you probably know why btw dont call me if you dont understand anything 
+    // some functions you probably know read docs if you dont understand anything 
     directionsService.route(request, function(response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
-        const distance = response.routes[0].legs[0].distance.text;
+        distance = response.routes[0].legs[0].distance.text;
         console.log('Distance between pickup and delivery: ' + distance);
       } else {
         console.log('Error calculating distance:', status);
