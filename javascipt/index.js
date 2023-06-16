@@ -99,6 +99,7 @@ function updateTotalPrice(distance) {
   previousWeight = selectedWeight;
 }
 
+
 const weightButtons = document.querySelectorAll('.weight-buttons button');
 weightButtons.forEach(button => {
   button.addEventListener('click', function () {
@@ -157,14 +158,24 @@ function calculateDistance() {
 
     directionsService.route(request, function (response, status) {
       if (status === google.maps.DirectionsStatus.OK) {
-        distance = response.routes[0].legs[0].distance.text; // e.g., "10 km"
-        const numericDistance = parseInt(distance.split(' ')[0]); // Extract the numerical value and convert to integer
-        updateTotalPrice(numericDistance); // Pass the numeric distance to updateTotalPrice
-        console.log('Distance between pickup and delivery: ' + numericDistance);
+        const route = response.routes[0];
+        let totalDistance = 0;
+    
+        // Iterate over each leg of the route and accumulate the distance
+        for (let i = 0; i < route.legs.length; i++) {
+          const leg = route.legs[i];
+          totalDistance += leg.distance.value;
+        }
+    
+        // Convert totalDistance to kilometers
+        const numericDistance = Math.round(totalDistance / 1000);
+        updateTotalPrice(numericDistance);
+        console.log('Distance between pickup and delivery: ' + numericDistance + ' km');
       } else {
         console.log('Error calculating distance:', status);
       }
     });
+        
   }
 }
 
