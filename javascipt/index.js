@@ -38,7 +38,6 @@
 //   deliveryAddressCount++;
 // }
 
-
 let distance;
 const orderOptions = document.querySelectorAll('.order-options');
 orderOptions.forEach(option => {
@@ -57,40 +56,41 @@ const defaultWeightButton = document.querySelector('.weight-buttons button[data-
 defaultWeightButton.classList.add('active');
 defaultWeightButton.click();
 
+
+
 let previousDistance;
 let previousWeight = 1;
 
 function updateTotalPrice(distance) {
-  let totalPrice = 45;
+  let totalPrice = 0;
+  let cost = 0;
+  let gst = 0;
 
   if (distance && selectedWeight <= 30) {
-    totalPrice = distance * 12;
-    const gst = totalPrice * 0.18;
-    totalPrice += gst;
+    cost = distance * 12;
+    gst = cost * 0.18;
+    totalPrice = cost + gst;
   } else if (selectedWeight > 30) {
     if (distance && selectedWeight) {
-      totalPrice = distance * 12 + 50;
-      const gst = totalPrice * 0.18;
-      totalPrice += gst;
+      cost = distance * 12;
+      gst = cost * 0.18;
+      totalPrice = cost + gst + 50; // Add additional cost of 50 Rs for 40 kg and 50 kg weight
     } else {
       totalPrice = 95;
     }
+  } else {
+    totalPrice = 45;
   }
 
-  // If distance is not available, use the previous distance value
-  if (!distance && previousDistance) {
-    totalPrice = previousDistance * 12;
+  // Round off totalPrice, cost, and gst to two decimal places
+  totalPrice = totalPrice.toFixed(2);
+  cost = cost.toFixed(2);
+  gst = gst.toFixed(2);
 
-    if (previousWeight <= 30) {
-      const gst = totalPrice * 0.18;
-      totalPrice += gst;
-    } else {
-      totalPrice += 50;
-      const gst = totalPrice * 0.18;
-      totalPrice += gst;
-    }
-  }
-
+  document.getElementById('total-distance').textContent = distance ? `Total Distance: ${distance.toFixed(2)} km` : 'Total Distance: ';
+  document.getElementById('cost').textContent = distance ? `Cost: ₹ ${cost}` : selectedWeight <= 30 ? 'Cost: ₹ 45' : 'Cost: ₹ 95';
+  document.getElementById('gst').textContent = distance ? `GST(18%): ₹ ${gst}` : 'GST(18%): ₹ ';
+  document.getElementById('total-cost').textContent = distance ? `Total Cost: ₹ ${totalPrice}` : 'Total Cost: ₹ ';
   document.querySelector('.total-price h1').textContent = `Total: from ₹ ${totalPrice}`;
   document.getElementById('total-price').textContent = totalPrice;
 
@@ -98,6 +98,11 @@ function updateTotalPrice(distance) {
   previousDistance = distance;
   previousWeight = selectedWeight;
 }
+
+
+
+
+
 
 
 const weightButtons = document.querySelectorAll('.weight-buttons button');
@@ -116,7 +121,6 @@ weightButtons.forEach(button => {
     updateTotalPrice();
   });
 });
-
 const defaultOrderOption = document.querySelector('.order-options');
 defaultOrderOption.classList.add('active');
 
@@ -160,24 +164,24 @@ function calculateDistance() {
       if (status === google.maps.DirectionsStatus.OK) {
         const route = response.routes[0];
         let totalDistance = 0;
-    
+
         // Iterate over each leg of the route and accumulate the distance
         for (let i = 0; i < route.legs.length; i++) {
           const leg = route.legs[i];
           totalDistance += leg.distance.value;
         }
-    
-        // Convert totalDistance to kilometers
-        const numericDistance = Math.round(totalDistance / 1000);
+
+        // Convert totalDistance to kilometers with decimal format
+        const numericDistance = totalDistance / 1000;
         updateTotalPrice(numericDistance);
-        console.log('Distance between pickup and delivery: ' + numericDistance + ' km');
+        console.log('Distance between pickup and delivery: ' + numericDistance.toFixed(2) + ' km');
       } else {
         console.log('Error calculating distance:', status);
       }
     });
-        
   }
 }
+
 
 // Call updateTotalPrice to initialize the total price display
 updateTotalPrice();

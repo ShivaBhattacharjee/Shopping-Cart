@@ -444,7 +444,7 @@ body {
     flex-direction: column;
 }
 .line{
-    background: #005b00 ;
+    border:1.3px dotted #005b00 ;
     width: 1.3px;
     height: 390px;
 }
@@ -452,8 +452,32 @@ body {
     display: block;
   }
 
-  
-  
+  .total-price{
+    display: flex; 
+    gap: 10px;
+    align-items: center;
+  }
+  .total-price img{
+    width: 30px;
+    cursor: pointer;
+  }
+  .faqandtootip{
+    background: black;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 15px;
+    position: absolute;
+    transform: translate(90%,-70%);
+    opacity: 0;
+    transition: .3s all ease-in-out;
+  }
+ .total-price:hover .faqandtootip{
+    opacity: 1;
+  }
 /* media queries here */
 
 @media(max-width:1400px) {
@@ -586,7 +610,6 @@ body {
         color: #fff;
         border-radius: 4px;
     }
-
     .total-price h1 {
         font-size: 23px;
     }
@@ -594,12 +617,24 @@ body {
         width: 40%;
         left: 2%;
     }
+    .faqandtootip{
+        transform: translate(30%,-60%);
+    }
 }
-@media(max-width:320px){
+@media(max-width:420px){
+    .faqandtootip{
+        font-size: 15px;
+        transform: translate(60%,-70%);
+    }
+}
+@media(max-width:325px){
     .order-card{
         font-size: 10px;
     }
     .pricing{
         width: 60%;
+    }
+    .faqandtootip{
+        transform: translate(30%,-70%);
     }
 }
