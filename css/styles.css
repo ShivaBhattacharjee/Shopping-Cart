@@ -650,6 +650,11 @@ body {
         display: none;
     }
 }
+@media(max-width:340px){
+    .faqandtootip{
+        transform: translate(30%,-60%);
+    }
+}
 @media(max-width:325px){
     .order-card{
         font-size: 10px;
