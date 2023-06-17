@@ -196,12 +196,13 @@ function updateScheduleOptions() {
       scheduleOptions[3].disabled = true;
       // Select the default option
       scheduleOptions[0].selected = true;
+      alert("No slot available select another date")
     } else if (currentTime >= 9 && currentTime < 12) {
       // Disable "12pm to 5pm" option
       scheduleOptions[2].disabled = true;
     } else {
       // Disable "9am to 12pm" option
-      scheduleOptions[1].disabled = true;
+      scheduleOptions[3].disabled = true;
     }
   } else {
     // Enable all options for future dates
