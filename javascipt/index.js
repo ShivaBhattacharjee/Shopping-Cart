@@ -193,6 +193,7 @@ function updateScheduleOptions() {
       // Disable both "9am to 12pm" and "12pm to 5pm" options
       scheduleOptions[1].disabled = true;
       scheduleOptions[2].disabled = true;
+      scheduleOptions[3].disabled = true;
       // Select the default option
       scheduleOptions[0].selected = true;
     } else if (currentTime >= 9 && currentTime < 12) {
