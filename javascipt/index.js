@@ -74,7 +74,7 @@ function updateTotalPrice(distance) {
     if (distance && selectedWeight) {
       cost = distance * 12;
       gst = cost * 0.18;
-      totalPrice = cost + gst + 50; // Add additional cost of 50 Rs for 40 kg and 50 kg weight
+      totalPrice = cost + gst + ((selectedWeight - 30) * 50); // Add additional cost based on weight above 30 kg
     } else {
       totalPrice = 95;
     }
@@ -213,12 +213,8 @@ function updateScheduleOptions() {
       scheduleOptions[3].disabled = true;
       // Select the default option
       scheduleOptions[0].selected = true;
-    } else if (currentTime >= 6 && currentTime < 12) {
-      // Disable "12pm to 6pm" option
-      scheduleOptions[3].disabled = true;
-    } else if (currentTime >= 18 || currentTime < 6) {
-      // Disable "6am to 12pm" option
-      scheduleOptions[1].disabled = true;
+    }else if(currentTime>12){
+      scheduleOptions[2].disabled = true;
     }
   } else {
     // Enable all options for future dates

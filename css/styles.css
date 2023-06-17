@@ -489,6 +489,7 @@ body {
     background: transparent;
     border: 1px solid #005b00 ;
     outline: none;
+    border-radius: 8px;
   }
 /* media queries here */
 
