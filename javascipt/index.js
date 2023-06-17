@@ -49,32 +49,24 @@ orderOptions.forEach(option => {
   });
 });
 
-let selectedWeight = 1;
-
-// Update defaultWeightButton selection
-const defaultWeightButton = document.querySelector('.weight-buttons button[data-weight="1"]');
-defaultWeightButton.classList.add('active');
-defaultWeightButton.click();
-
-
-
 let previousDistance;
 let previousWeight = 1;
+let selectedWeight = 1;
 
-function updateTotalPrice(distance) {
-  let totalPrice = 0;
+function updateTotalPrice(distance, weight) {
+     let totalPrice = 0;
   let cost = 0;
   let gst = 0;
 
-  if (distance && selectedWeight <= 30) {
+  if (distance && weight <= 30) {
     cost = distance * 12;
     gst = cost * 0.18;
     totalPrice = cost + gst;
-  } else if (selectedWeight > 30) {
-    if (distance && selectedWeight) {
-      cost = distance * 12;
+  } else if (weight > 30) {
+    if (distance && weight) {
+      cost = (distance * 12) + 50;
       gst = cost * 0.18;
-      totalPrice = cost + gst + ((selectedWeight - 30) * 50); // Add additional cost based on weight above 30 kg
+      totalPrice = cost + gst; // Add additional cost based on weight above 30 kg
     } else {
       totalPrice = 95;
     }
@@ -99,12 +91,6 @@ function updateTotalPrice(distance) {
   previousWeight = selectedWeight;
 }
 
-
-
-
-
-
-
 const weightButtons = document.querySelectorAll('.weight-buttons button');
 weightButtons.forEach(button => {
   button.addEventListener('click', function () {
@@ -112,15 +98,17 @@ weightButtons.forEach(button => {
       btn.classList.remove('active');
     });
     this.classList.add('active');
+
     const weight = parseInt(this.getAttribute('data-weight'));
     if (weight > 30) {
       selectedWeight = weight;
     } else {
       selectedWeight = 1;
     }
-    updateTotalPrice();
+    updateTotalPrice(previousDistance, selectedWeight);
   });
 });
+
 const defaultOrderOption = document.querySelector('.order-options');
 defaultOrderOption.classList.add('active');
 
@@ -173,7 +161,7 @@ function calculateDistance() {
 
         // Convert totalDistance to kilometers with decimal format
         const numericDistance = totalDistance / 1000;
-        updateTotalPrice(numericDistance);
+        updateTotalPrice(numericDistance, selectedWeight);
         console.log('Distance between pickup and delivery: ' + numericDistance.toFixed(2) + ' km');
       } else {
         console.log('Error calculating distance:', status);
@@ -182,16 +170,14 @@ function calculateDistance() {
   }
 }
 
-
 // Call updateTotalPrice to initialize the total price display
 updateTotalPrice();
-
 
 // Get the current local date
 const currentDate = new Date().toLocaleDateString('en-CA');
 
 // Set the min attribute of the depart date input field to the current local date
-document.getElementById("depart-date-input").min = currentDate;
+// document.getElementById("depart-date-input").min = currentDate;
 
 // Set the min attribute of the arrive date input field to the current local date
 document.getElementById("arrive-date-input").min = currentDate;
@@ -200,6 +186,32 @@ document.getElementById("arrive-date-input").min = currentDate;
 function updateScheduleOptions() {
   const currentDate = new Date().toLocaleDateString('en-CA');
   const selectedDate = document.getElementById("arrive-date-input").value;
+  const selectedSchedule = document.getElementById("schedule").value;
+  const currentTime = new Date().getHours();
+  const scheduleOptions = document.querySelectorAll("#schedule option");
+
+  // Enable/disable options based on the selected date and time
+  if (selectedDate === currentDate) {
+    if (currentTime < 6 || (currentTime >= 12 && currentTime < 18)) {
+      // Disable "6am to 12pm" and "12pm to 6pm" options
+      scheduleOptions[1].disabled = true;
+      scheduleOptions[2].disabled = true;
+      scheduleOptions[3].disabled = true;
+      // Select the default option
+      scheduleOptions[0].selected = true;
+    } else if (currentTime >= 6 && currentTime < 12) {
+      // Disable "12pm to 6pm" option
+      scheduleOptions[3].disabled = true;
+    } else if (currentTime >= 18 || currentTime < 6) {
+      // Disable "6am to 12pm" option
+      scheduleOptions[1].disabled = true;
+    }
+  } else {
+    // Enable all options for future dates
+    scheduleOptions.forEach(option => {
+      option.disabled = false;
+    });
+  }
 
   // Show/hide the "Change date" option
   const changeDateOption = document.querySelector("#schedule option[value='change-date-option']");
@@ -212,7 +224,7 @@ function updateScheduleOptions() {
 
 // Attach event listeners to the date input fields
 document.getElementById("arrive-date-input").addEventListener("change", updateScheduleOptions);
-document.getElementById("depart-date-input").addEventListener("change", updateScheduleOptions);
+// document.getElementById("depart-date-input").addEventListener("change", updateScheduleOptions);
 
 // Initial update of schedule options based on the current date and time
 updateScheduleOptions();
