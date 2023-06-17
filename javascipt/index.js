@@ -66,7 +66,7 @@ function updateTotalPrice(distance, weight) {
     if (distance && weight) {
       cost = (distance * 12) + 50;
       gst = cost * 0.18;
-      totalPrice = cost + gst; // Add additional cost based on weight above 30 kg
+      totalPrice = cost + gst; 
     } else {
       totalPrice = 95;
     }
@@ -124,7 +124,7 @@ paymentOptions.forEach(option => {
 
 // calculate the delivery and pickup distance
 
-// Get references to the input fields
+
 const pickupAddressInput = document.getElementById('pickup-address-input');
 const deliveryAddressInput = document.getElementById('delivery-address-input');
 
@@ -153,13 +153,12 @@ function calculateDistance() {
         const route = response.routes[0];
         let totalDistance = 0;
 
-        // Iterate over each leg of the route and accumulate the distance
+        
         for (let i = 0; i < route.legs.length; i++) {
           const leg = route.legs[i];
           totalDistance += leg.distance.value;
         }
 
-        // Convert totalDistance to kilometers with decimal format
         const numericDistance = totalDistance / 1000;
         updateTotalPrice(numericDistance, selectedWeight);
         console.log('Distance between pickup and delivery: ' + numericDistance.toFixed(2) + ' km');
@@ -170,14 +169,12 @@ function calculateDistance() {
   }
 }
 
-// Call updateTotalPrice to initialize the total price display
+
 updateTotalPrice();
 
 // Get the current local date
 const currentDate = new Date().toLocaleDateString('en-CA');
 
-// Set the min attribute of the depart date input field to the current local date
-// document.getElementById("depart-date-input").min = currentDate;
 
 // Set the min attribute of the arrive date input field to the current local date
 document.getElementById("arrive-date-input").min = currentDate;
@@ -222,9 +219,9 @@ function updateScheduleOptions() {
   }
 }
 
-// Attach event listeners to the date input fields
+
 document.getElementById("arrive-date-input").addEventListener("change", updateScheduleOptions);
 // document.getElementById("depart-date-input").addEventListener("change", updateScheduleOptions);
 
-// Initial update of schedule options based on the current date and time
+
 updateScheduleOptions();
