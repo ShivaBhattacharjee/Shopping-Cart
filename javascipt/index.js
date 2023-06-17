@@ -189,28 +189,22 @@ function updateScheduleOptions() {
 
   // Enable/disable options based on the selected date and time
   if (selectedDate === currentDate) {
-    if (currentTime < 9) {
-      // Disable both "9am to 12pm" and "12pm to 5pm" options
-      scheduleOptions[1].disabled = true;
-      scheduleOptions[2].disabled = true;
-      scheduleOptions[3].disabled = true;
-      // Select the default option
-      scheduleOptions[0].selected = true;
-      alert("No slot available select another date")
-    } else if (currentTime >= 9 && currentTime < 12) {
-      // Disable "12pm to 5pm" option
-      scheduleOptions[2].disabled = true;
-    } else {
+    if (currentTime >= 0 && currentTime < 9) {
+      // Enable both "9am to 12pm" and "12pm to 5pm" options
+      scheduleOptions[1].disabled = false;
+      scheduleOptions[2].disabled = false;
+    } else if (currentTime >= 12) {
       // Disable "9am to 12pm" option
+      scheduleOptions[1].disabled = true;
+    }else if(currentTime>=17){
       scheduleOptions[3].disabled = true;
+      alert("No slot available change date")
     }
   } else {
     // Enable all options for future dates
     scheduleOptions.forEach(option => {
       option.disabled = false;
     });
-    // Select the default option
-    scheduleOptions[0].selected = true;
   }
 }
 
