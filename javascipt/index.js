@@ -68,10 +68,10 @@ function updateTotalPrice(distance, weight) {
       gst = cost * 0.18;
       totalPrice = cost + gst; 
     } else {
-      totalPrice = 95;
+      totalPrice = 67;
     }
   } else {
-    totalPrice = 45;
+    totalPrice = 12;
   }
 
   // Round off totalPrice, cost, and gst to two decimal places
