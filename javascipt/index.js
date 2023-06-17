@@ -200,28 +200,6 @@ document.getElementById("arrive-date-input").min = currentDate;
 function updateScheduleOptions() {
   const currentDate = new Date().toLocaleDateString('en-CA');
   const selectedDate = document.getElementById("arrive-date-input").value;
-  const selectedSchedule = document.getElementById("schedule").value;
-  const currentTime = new Date().getHours();
-  const scheduleOptions = document.querySelectorAll("#schedule option");
-
-  // Enable/disable options based on the selected date and time
-  if (selectedDate === currentDate) {
-    if (currentTime < 6 || (currentTime >= 12 && currentTime < 18)) {
-      // Disable "6am to 12pm" and "12pm to 6pm" options
-      scheduleOptions[1].disabled = true;
-      scheduleOptions[2].disabled = true;
-      scheduleOptions[3].disabled = true;
-      // Select the default option
-      scheduleOptions[0].selected = true;
-    }else if(currentTime>12){
-      scheduleOptions[2].disabled = true;
-    }
-  } else {
-    // Enable all options for future dates
-    scheduleOptions.forEach(option => {
-      option.disabled = false;
-    });
-  }
 
   // Show/hide the "Change date" option
   const changeDateOption = document.querySelector("#schedule option[value='change-date-option']");
