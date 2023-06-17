@@ -68,7 +68,7 @@ function updateTotalPrice(distance, weight) {
       gst = cost * 0.18;
       totalPrice = cost + gst; 
     } else {
-      totalPrice = 67;
+      totalPrice = 62;
     }
   } else {
     totalPrice = 12;
