@@ -195,7 +195,7 @@ function updateScheduleOptions() {
       scheduleOptions[2].disabled = false;
     } else if (currentTime >= 12) {
       // Disable "9am to 12pm" option
-      scheduleOptions[1].disabled = true;
+      scheduleOptions[2].disabled = true;
     }else if(currentTime>=17){
       scheduleOptions[3].disabled = true;
       alert("No slot available change date")

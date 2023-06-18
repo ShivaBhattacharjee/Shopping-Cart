@@ -447,7 +447,7 @@ body {
 .line{
     border:1.3px dotted #005b00 ;
     width: 1.3px;
-    height: 390px;
+    height: 390px
 }
 .barnadcircle.connected .circle .line {
     display: block;
