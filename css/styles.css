@@ -382,7 +382,10 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
-
+.other-btns .disabled{
+    background: gray;
+    cursor:not-allowed;
+}
 .other-btns img {
     background: rgb(214, 210, 210);
     padding: 12px;

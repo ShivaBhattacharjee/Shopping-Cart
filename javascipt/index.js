@@ -140,7 +140,7 @@ deliveryAddressInput.addEventListener('change', calculateDistance);
 function calculateDistance() {
   const pickupAddress = pickupAddressInput.value;
   const deliveryAddress = deliveryAddressInput.value;
-
+  const submitDisable = document.getElementById("submit-order-btn")
   if (pickupAddress && deliveryAddress) {
     const request = {
       origin: pickupAddress,
@@ -164,6 +164,8 @@ function calculateDistance() {
         console.log('Distance between pickup and delivery: ' + numericDistance.toFixed(2) + ' km');
       } else {
         console.log('Error calculating distance:', status);
+        alert("Unable to calculate distance change location")
+        submitDisable.classList.add("disabled")
       }
     });
   }
@@ -193,10 +195,10 @@ function updateScheduleOptions() {
       // Enable both "9am to 12pm" and "12pm to 5pm" options
       scheduleOptions[2].disabled = false;
       scheduleOptions[3].disabled = false;
-    } else if (currentTime >= 12 && currentDate<=17) {
+    } else if (currentTime >= 12 && currentTime<=17) {
       // Disable "9am to 12pm" option
       scheduleOptions[2].disabled = true;
-    }else{
+    }else if(currentTime>17){
       scheduleOptions[2].disabled = true;
       scheduleOptions[3].disabled = true;
       alert("No slot available change date")
