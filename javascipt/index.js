@@ -162,6 +162,7 @@ function calculateDistance() {
         const numericDistance = totalDistance / 1000;
         updateTotalPrice(numericDistance, selectedWeight);
         console.log('Distance between pickup and delivery: ' + numericDistance.toFixed(2) + ' km');
+        submitDisable.classList.remove("disabled")
       } else {
         console.log('Error calculating distance:', status);
         alert("Unable to calculate distance change location")
